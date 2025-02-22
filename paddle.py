@@ -10,4 +10,11 @@ class Paddle(Turtle):
         self.goto(0, -250)
 
 
-        #needs to follow the mouse 
+        #follow the mouse 
+
+     
+
+    
+
+
+

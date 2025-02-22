@@ -27,6 +27,9 @@ scoreboard = Scoreboard()
 # while game_on:
 #     pass
 
+screen.listen()
+screen.onmousemove(paddle.move_with_mouse)
+
 
 screen.update()
 
