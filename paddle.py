@@ -2,11 +2,12 @@ from turtle import Turtle
 
 class Paddle(Turtle):
     def __init__(self):
+        super().__init__()
         self.shape("square")
-        self.shapesize(stretch_wid=5, stretch_len=1)
+        self.shapesize(stretch_wid=1, stretch_len=10)
         self.color("white")
         self.penup()
-        #self.goto(position)
+        self.goto(0, -250)
 
 
         #needs to follow the mouse 

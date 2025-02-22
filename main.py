@@ -2,6 +2,7 @@
 from turtle import Screen
 from paddle import Paddle
 from ball import Ball
+from scoreboard import Scoreboard
 
 
 """.....................................Movements and Collisions ...................."""
@@ -18,9 +19,17 @@ screen.tracer(0)
 
 
 ball = Ball()
-# paddle = Paddle()
+paddle = Paddle()
+scoreboard = Scoreboard()
 
 
 # game_on = True
 # while game_on:
 #     pass
+
+
+screen.update()
+
+
+# Keep the screen open
+screen.mainloop()
