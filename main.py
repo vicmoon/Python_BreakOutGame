@@ -28,7 +28,6 @@ scoreboard = Scoreboard()
 #     pass
 
 screen.listen()
-screen.onmousemove(paddle.move_with_mouse)
 
 
 screen.update()
