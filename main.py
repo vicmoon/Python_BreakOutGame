@@ -21,6 +21,6 @@ ball = Ball()
 # paddle = Paddle()
 
 
-game_on = True
-while game_on:
-    pass
+# game_on = True
+# while game_on:
+#     pass
