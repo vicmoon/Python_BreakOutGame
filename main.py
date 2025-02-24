@@ -20,23 +20,22 @@ screen.tracer(0)
 
 ball = Ball()
 paddle = Paddle()
+score = Scoreboard()
 
-
-
+screen_width = screen.window_width()  # Usually 800 by default
+screen_height = screen.window_height()  # Usually 600 by default
 
 
 rows = 4   # Number of rows
-cols = 10  # Number of columns
-brick_width = 50  # Adjust based on Brick size
-brick_height = 20  # Adjust based on Brick size
-start_x = -225  # Adjust to center bricks on screen
-start_y = 250   # Adjust to position at the top
+cols = 8  # Number of columns
+margin = 20
 
-#total width 
-total_bricks_width = cols * brick_width
+available_width = screen_width - (2 * margin)
+brick_width = available_width / cols
+brick_height = 20
 
 #starting point 
-start_x = -total_bricks_width / 2 
+start_x = (-screen_width / 2 ) + margin
 start_y = 250 
 
 bricks = []
@@ -101,7 +100,7 @@ def move_ball():
 
     #collision with the bricks 
     if check_brick_collision(ball, bricks):
-        print("Collision with the bricks!")
+        score.add_point()
 
     #collision with top wall 
 
@@ -115,13 +114,14 @@ def move_ball():
 
     #collision with paddle 
 
-    if ball.distance(paddle) < 50 and ball_y < -250:
+    if ball.distance(paddle) < 50 and ball_y < -230:
         offset = ball_x - paddle_x
-        ball_x = offset * 0.1 
+        ball_x = offset * 0.3 
         ball.bounce_y()
 
     if ball_y <= -290:
         ball.reset_position()
+
 
     screen.update()
     screen.ontimer(move_ball, 20)  # Keep updating ball movement every 20ms
