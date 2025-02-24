@@ -5,8 +5,15 @@ class Brick(Turtle):
     def __init__(self, brick_width, brick_height):
         super().__init__()
         self.shape("square")
-        width_stretch = brick_width / 20
-        height_stretch = brick_height / 20
+
+        width_stretch = 2.5
+        height_stretch = 1 
+
+        if brick_height and brick_height:
+            
+            width_stretch = brick_width / 20
+            height_stretch = brick_height / 20
+        
         self.shapesize(stretch_wid=height_stretch,stretch_len=width_stretch)
         self.color("green")
         self.fillcolor("blue")

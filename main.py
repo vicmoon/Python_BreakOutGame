@@ -28,22 +28,22 @@ screen_height = screen.window_height()  # Usually 600 by default
 
 rows = 4   # Number of rows
 cols = 8  # Number of columns
-margin = 20
 
-available_width = screen_width - (2 * margin)
+available_width = screen_width
 brick_width = available_width / cols
-brick_height = 20
+brick_height = 30
 
 #starting point 
-start_x = (-screen_width / 2 ) + margin
+start_x = (-screen_width / 2 ) 
 start_y = 250 
 
 bricks = []
 for row in range(rows):
     for col in range(cols):
-        brick = Brick()
-        x_pos = start_x + (col * brick_width)  # Adjust X position
-        y_pos = start_y - (row * brick_height)  # Adjust Y position
+        brick = Brick(brick_width=brick_width, brick_height=brick_height)
+
+        x_pos = start_x + (col * brick_width) + (brick_width / 2)  
+        y_pos = start_y - (row * brick_height)
         brick.goto(x_pos, y_pos)  # Move brick to position
         bricks.append(brick) 
 
