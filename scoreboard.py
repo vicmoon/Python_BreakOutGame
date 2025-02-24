@@ -14,10 +14,10 @@ class Scoreboard(Turtle):
         self.clear()
         self.goto(0, 0)
         self.write(self.score, f"Score: {self.score}", align=ALIGNMENT, font=FONT)
-
+       
 
 
     def add_point(self):
         self.score += 1
         self.update_scoreboard()
-        
+    

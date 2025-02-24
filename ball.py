@@ -1,4 +1,7 @@
 from turtle import Turtle 
+ALIGNMENT= "center"
+FONT= ("courier", 30, "normal")
+
 
 class Ball(Turtle):
     def __init__(self):
@@ -31,4 +34,7 @@ class Ball(Turtle):
         self.ball_speed = 1
         self.bounce_y()
 
-
+    def game_over(self):
+        self.goto(0, 0)
+        self.write(f"Game Over ☠️" , align=ALIGNMENT, font=FONT)
+        self.clear()

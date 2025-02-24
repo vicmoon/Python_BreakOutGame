@@ -4,8 +4,34 @@ from paddle import Paddle
 from ball import Ball
 from scoreboard import Scoreboard
 from bricks import Brick
+import time
 
+def reset_game():
+    """Reset the game state for a new round"""
+    global bricks, ball
+    
+    # Clear existing bricks
+    for brick in bricks:
+        brick.hideturtle()
+    bricks.clear()
+    
+    # Reset ball position
+    ball.reset_position()
 
+    score.clear()
+    
+    
+    # Create new bricks
+    for row in range(rows):
+        for col in range(cols):
+            brick = Brick(brick_width=brick_width, brick_height=brick_height)
+            x_pos = start_x + (col * brick_width) + (brick_width / 2)  
+            y_pos = start_y - (row * brick_height)
+            brick.goto(x_pos, y_pos)
+            bricks.append(brick)
+    
+    # Resume game
+    screen.ontimer(move_ball, 20)
 
 
 """.....................................UI SetUp...................................... """
@@ -22,11 +48,11 @@ ball = Ball()
 paddle = Paddle()
 score = Scoreboard()
 
-screen_width = screen.window_width()  # Usually 800 by default
-screen_height = screen.window_height()  # Usually 600 by default
+screen_width = screen.window_width()  
+screen_height = screen.window_height() 
 
 
-rows = 4   # Number of rows
+rows = 5   # Number of rows
 cols = 8  # Number of columns
 
 available_width = screen_width
@@ -50,11 +76,11 @@ for row in range(rows):
 
 
 
-
 """.....................................Movements and Collisions ...................."""
 
 # Variable to store mouse position
 mouse_x = 0
+game_paused = False
 
 def get_mouse_coordinates(x, y):
     global mouse_x
@@ -89,6 +115,10 @@ def check_brick_collision(ball, bricks):
 
 
 def move_ball():
+    global game_paused
+
+    if game_paused:
+        return
 
     ball.change_position()  
 
@@ -101,11 +131,23 @@ def move_ball():
     #collision with the bricks 
     if check_brick_collision(ball, bricks):
         score.add_point()
+        score.update_scoreboard()
 
     #collision with top wall 
 
     if ball_y >= 290:
         ball.bounce_y()
+
+    #collision with bottom wall
+
+    if ball_y <= -290:
+        ball.game_over()
+        game_paused = True
+        
+        #schedule sleep 
+        screen.ontimer(lambda: restart_after_death(), 2000)
+        return 
+        
 
     #collision with side walls 
 
@@ -125,6 +167,11 @@ def move_ball():
 
     screen.update()
     screen.ontimer(move_ball, 20)  # Keep updating ball movement every 20ms
+
+def restart_after_death():
+    global game_paused
+    game_paused = False
+    reset_game()
 
 
 
